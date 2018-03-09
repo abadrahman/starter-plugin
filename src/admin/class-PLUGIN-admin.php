@@ -117,7 +117,6 @@ class {{plugin.package}}_Admin {
      * @since    1.0.0
      */
     public function {{plugin.prefix}}_admin_display() {
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/{{plugin.slug}}-admin-settings.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/{{plugin.slug}}-admin-display.php';
 
     }

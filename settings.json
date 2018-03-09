@@ -20,6 +20,6 @@
     "prefix":           "str_plgn_",
     "menu_title":       "Starter Plugin Settings",
     "menu_icon":        "dashicons-smiley",
-    "dev":              "Add your generated plugins output directory location here"
+    "dev":              ""
   }
 }

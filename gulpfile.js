@@ -41,7 +41,6 @@ gulp.task('l18n', ['tokens'], function() {
 
 // Build Directory
 gulp.task('src', function() {
-
   return gulp.src(['./src/**', '!./src/**/*PLUGIN*'], {base: "./src/"})
     .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug))
 });

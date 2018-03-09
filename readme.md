@@ -1,8 +1,8 @@
-**This project has not been updated, and the base plugin created does not use best practices in some areas.** 
+#WordPress Plugin Boilerplate Generator
 
 ## Synopsis
 
-Uses Gulp to generate a starter WordPress plugin
+Uses Gulp to generate a starter WordPress plugin boilerplate.
 
 ## Code Example
 
@@ -13,7 +13,7 @@ git clone https://github.com/mikejhale/starter-plugin`
 2. Install Gulp and required plugins 
 
 ```
-npm install --save-dev gulp gulp-sass jshint gulp-jshint gulp-concat gulp-uglify gulp-rename gulp-wp-pot gulp-sort gulp-token-replace
+npm install
 ```
 
 3. Change these settings in the settings.json file for your plugin.
