@@ -2,23 +2,24 @@
   "plugin":{
     "name":             "Starter Plugin",
     "esc_name":         "Starter Plugin",
-    "tagline":          "WordPress Starter Plugin using Gulp",
-    "uri":              "http://mikehale.me/plugins/starter-plugin",
+    "tagline":          "WordPress Starter Plugin Generator using Gulp",
+    "uri":              "https://github.com/abadrahman/starter-plugin",
     "desc":             "Starter Plugin using Gulp",
-    "author":           "MikeHale",
-    "author_uri":       "http://mikehale.me",
+    "author":           "Plugin Author",
+    "author_email":     "",
+    "author_uri":       "",
     "tags":             "",
     "slug":             "starter-plugin",
     "function_slug":    "starter_plugin",
     "constant_prefix":  "STARTER_PLUGIN",
     "version":          "1.0.0",
-    "requires_version": "4.0.0",
-    "tested_version":   "4.5.2",
+    "requires_version": "4.9.4",
+    "tested_version":   "4.9.4",
     "stable_tag":       "1.0.0",
     "package":          "Starter_Plugin",
     "prefix":           "str_plgn_",
     "menu_title":       "Starter Plugin Settings",
-    "menu_icon":        "",
-    "dev":              "E:\\xampp\\htdocs\\amp\\wp-content\\plugins\\"
+    "menu_icon":        "dashicons-smiley",
+    "dev":              "Add your generated plugins output directory location here"
   }
 }

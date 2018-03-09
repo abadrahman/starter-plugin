@@ -6,67 +6,23 @@ var gulp   = require('gulp'),
     rename = require('gulp-rename'),
     pot    = require('gulp-wp-pot'),
     sort   = require('gulp-sort'),
-    token  = require('gulp-token-replace');
+    token  = require('gulp-token-replace'),
+    cleanCSS = require('gulp-clean-css'),
+    batch = require('gulp-batch'),
+    watch = require('gulp-watch');
 
 var pluginTokens = require('./settings.json');
 
-// Admin styles
-gulp.task('admin-sass', function() {
-  return gulp.src('./stylesheets/admin.scss')
-    .pipe(sass())
-    .pipe(rename({prefix: pluginTokens.plugin.slug + '-'}))
-    .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug + '/assets/admin/css'));
-});
-
-// Frontend Styles
-gulp.task('public-sass', function() {
-  return gulp.src('./stylesheets/public.scss')
-    .pipe(sass())
-    .pipe(rename({prefix: pluginTokens.plugin.slug + '-'}))
-    .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug + '/assets/public/css'));
-});
-
-// Combined Sass task
-gulp.task('sass', ['admin-sass', 'public-sass']);
-
-// Admin scripts
-gulp.task('admin-js', function () {
-  return gulp.src('./scripts/admin/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('fail'))
-    .pipe(concat(pluginTokens.plugin.slug + '-admin-script.js'))
-    .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug + '/assets/admin/js'))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug + '/assets/admin/js'))
-    ;
-});
-
-// Frontend scripts
-gulp.task('public-js', function () {
-  return gulp.src('./scripts/public/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('fail'))
-    .pipe(concat(pluginTokens.plugin.slug + '-public-script.js'))
-    .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug + '/assets/public/js'))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug + '/assets/public/js'));
-});
-
-// Combined js task
-gulp.task('js', ['admin-js', 'public-js']);
-
 // Token replacements
 gulp.task('tokens', function() {
-  return gulp.src(['./src/**/*.php', './src/readme.*'], {base: "./src/"})
+  return gulp.src(['./src/**/*.php', './src/README.*','./src/assets/**/*','./src/gulpfile.js'], {base: "./src/"})
     .pipe(token({global:pluginTokens}))
     .pipe(rename(function(path) {
       if (path.dirname == 'classes') {
-        path.basename = path.basename.replace('_PLUGIN', pluginTokens.plugin.package);
+        path.basename = path.basename.replace('PLUGIN', pluginTokens.plugin.package);
       }
       else {
-        path.basename = path.basename.replace('_PLUGIN', pluginTokens.plugin.slug);
+        path.basename = path.basename.replace('PLUGIN', pluginTokens.plugin.slug);
       }
     }))
     .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug));
@@ -85,7 +41,8 @@ gulp.task('l18n', ['tokens'], function() {
 
 // Build Directory
 gulp.task('src', function() {
-  return gulp.src(['./src/**', '!./src/**/*_PLUGIN*'], {base: "./src/"})
+
+  return gulp.src(['./src/**', '!./src/**/*PLUGIN*'], {base: "./src/"})
     .pipe(gulp.dest('./plugin-build/' + pluginTokens.plugin.slug))
 });
 
@@ -95,4 +52,11 @@ gulp.task('dev', ['src'], function() {
   .pipe(gulp.dest(pluginTokens.plugin.dev + pluginTokens.plugin.slug, {overwrite: true}));
 });
 
-gulp.task('default', ['sass', 'js', 'l18n', 'src', 'tokens', 'dev']);
+
+gulp.task('default', ['src', 'tokens', 'dev']);
+
+gulp.task('watch', function () {
+    watch('**/*.js', batch(function (events, done) {
+        gulp.start('default', done);
+    }));
+});

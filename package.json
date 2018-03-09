@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikejhale/starter-plugin.git"
+    "url": "git+https://github.com/abadrahman/starter-plugin.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mikejhale/starter-plugin/issues"
+    "url": "https://github.com/abadrahman/starter-plugin/issues"
   },
-  "homepage": "https://github.com/mikejhale/starter-plugin#readme",
+  "homepage": "https://github.com/abadrahman/starter-plugin#readme",
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",

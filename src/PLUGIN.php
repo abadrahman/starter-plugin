@@ -28,36 +28,53 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'WPINC' ) ) {
 	die;
-}
-
-define( '{{plugin.constant_prefix}}_INCLUDES', dirname( __FILE__ ) . '/includes' );
-define( '{{plugin.constant_prefix}}_ASSETS'  , plugin_dir_url( __FILE__ ) . '/assets' );
-
-add_action( 'plugins_loaded', '{{plugin.prefix}}_load_textdomain' );
-function {{plugin.prefix}}_load_textdomain() {
-  load_plugin_textdomain( '{{plugin.slug}}', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-{{plugin.slug}}-activator.php
+ * This action is documented in includes/class-moreniche-activator.php
  */
-register_activation_hook( __FILE__, '{{plugin.prefix}}_activate_plugin' );
 function {{plugin.prefix}}_activate_plugin() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-{{plugin.slug}}-activator.php';
 	{{plugin.package}}_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-{{plugin.slug}}-deactivator.php
+ * This action is documented in includes/class-moreniche-deactivator.php
  */
-register_deactivation_hook( __FILE__, '{{plugin.prefix}}_deactivate_plugin' );
 function {{plugin.prefix}}_deactivate_plugin() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-{{plugin.slug}}-deactivator.php';
 	{{plugin.package}}_Deactivator::deactivate();
 }
 
-require_once( {{plugin.constant_prefix}}_INCLUDES . '/widgets/{{plugin.slug}}-widget.php' );
-require_once( {{plugin.constant_prefix}}_INCLUDES . '/shortcodes/{{plugin.slug}}-shortcodes.php' );
-require_once( dirname( __FILE__ ) . '/classes/class.{{plugin.package}}.php' );
+register_activation_hook( __FILE__, '{{plugin.prefix}}_activate_plugin' );
+register_deactivation_hook( __FILE__, '{{plugin.prefix}}_deactivate_plugin' );
+
+
+
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path( __FILE__ ) . 'includes/class-{{plugin.slug}}.php';
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function {{plugin.prefix}}_run() {
+
+	${{plugin.function_slug}} = new {{plugin.package}}();
+	${{plugin.function_slug}}->run();
+
+}
+
+{{plugin.prefix}}_run();
