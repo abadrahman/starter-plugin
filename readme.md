@@ -1,4 +1,4 @@
-#WordPress Plugin Boilerplate Generator
+# WordPress Plugin Boilerplate Generator
 
 ## Synopsis
 
