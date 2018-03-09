@@ -8,7 +8,9 @@ Uses Gulp to generate a starter WordPress plugin boilerplate.
 
 1. Clone this repo
 
-git clone https://github.com/mikejhale/starter-plugin`
+```
+git clone https://github.com/abadrahman/starter-plugin
+```
 
 2. Install Gulp and required plugins 
 
